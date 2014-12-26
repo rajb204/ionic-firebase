@@ -9,10 +9,15 @@
 
     <script src="js/ionic.js"></script>
     <script src="js/ionic-angular.js"></script>
+    
+    <!-- firebase angular-->
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js"></script>
 
     <!-- Needed for Cordova/PhoneGap -->
-    <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <!--<script type="text/javascript" src="cordova.js"></script> -->
     <script src="js/app.js"></script>
+    
   </head>
   <body ng-app="todo" ng-controller="TodoCtrl">
   <side-menus>
@@ -23,7 +28,7 @@
         <button class="button button-icon" ng-click="toggleProjects()">
           <i class="icon ion-navicon"></i>
         </button>
-        <h1 class="title">{{activeProject.title}}</h1>
+        <h1 class="title"></h1>
         <!-- New Task button-->
         <button class="button button-clear" ng-click="newTask()">
           New
@@ -31,8 +36,8 @@
       </header>
       <content has-header="true" scroll="false">
         <list>
-          <item ng-repeat="task in activeProject.tasks">
-            {{task.title}}
+          <item ng-repeat="task in projectsList[user.lastproject]">
+
           </item>
         </list>
       </content>
@@ -48,8 +53,9 @@
         </header>
         <content has-header="true" scroll="false">
           <list>
-            <item ng-repeat="project in projects" ng-click="selectProject(project)" ng-class="{active: activeProject == project}">
-              {{project.title}}
+            <item ng-repeat="(name,project) in projectsList" ng-click="selectProject(name)" 
+                  ng-class="{active: user.    lastproject == project}">
+
             </item>
           </list>
         </content>
